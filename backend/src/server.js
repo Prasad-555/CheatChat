@@ -4,12 +4,14 @@ import authRouter from "./routes/authRoute.js"
 import messageRoute from "./routes/messageRoute.js"
 import path from "path";
 import { connectDB } from "./lib/db.js";
+import cookieParser from "cookie-parser";
 dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 3000; 
 const __dirname = path.resolve(); 
 
 app.use(express.json()); 
+app.use(cookieParser());
 app.use("/api/auth", authRouter);
 app.use("/api/message", messageRoute);
 
