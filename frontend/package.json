@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "cheat-chat": "file:..",
+    "mongoose": "^9.7.1",
     "react": "^19.2.6",
     "react-dom": "^19.2.6"
   },
