@@ -3,7 +3,7 @@ import { signup,login,logout, updateProfile } from "../controllers/authControlle
 import { protectRoute } from "../middlewares/authMiddleware.js";
 import {arcjetProtection } from "../middlewares/arcjetMiddleware.js"
 const authRouter = express.Router();
-authRouter.use(arcjetProtection);
+// authRouter.use(arcjetProtection);
 
 authRouter.post("/signup", signup)
 authRouter.post("/login", login)

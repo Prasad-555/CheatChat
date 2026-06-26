@@ -13,7 +13,7 @@ const __dirname = path.resolve();
 app.use(express.json()); 
 app.use(cookieParser());
 app.use("/api/auth", authRouter);
-app.use("/api/message", messageRoute);
+app.use("/api/messages", messageRoute);
 
 if(process.env.NODE_ENV === "production") {
     app.use(express.static(path.join(__dirname, "../frontend")))
