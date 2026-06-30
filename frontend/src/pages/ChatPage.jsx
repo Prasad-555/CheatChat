@@ -1,9 +1,34 @@
-import React from 'react'
+import React from "react";
+import { useAuthStore } from "../store/useAuthStore";
+import { useChatStore } from "../store/useChatStore";
+import BorderAnimatedContainer from "../components/BorderAnimatedContainer";
+import ProfileHeader from "../components/ProfileHeader";
+import ActiveTabSwitch from "../components/ActiveTabSwitch";
+import ContactList from "../components/ContactList";
+import ChatList from "../components/ChatList";
+import ChatContainer from "../components/ChatContainer";
+import NoConversationPlaceHolder from "../components/NoConversationPlaceHolder";
 
 const ChatPage = () => {
-  return (
-    <div>ChatPage</div>
-  )
-}
+  const { logout } = useAuthStore();
+  const { getAllContacts, allContacts, activeTab, selectedUser } = useChatStore();
 
-export default ChatPage
+  return (
+    <div className="relative w-full max-w-5xl h-[650px]">
+      <BorderAnimatedContainer>
+        <div className="w-80 bg-slate-800/50 backdrop-blur-sm flex flex-col">
+          <ProfileHeader />
+          <ActiveTabSwitch />
+          <div className="flex-1 overflow-y-auto p-4 space-y-2">
+            {activeTab === "chats" ? <ChatList /> : <ContactList />}
+          </div>
+        </div>
+        <div className="flex-1 flex flex-col bg-slate-900/50 backdrop-blur-sm">
+          {selectedUser ? <ChatContainer/> : <NoConversationPlaceHolder/>}
+        </div>
+      </BorderAnimatedContainer>
+    </div>
+  );
+};
+
+export default ChatPage;
