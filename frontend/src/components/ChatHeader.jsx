@@ -21,7 +21,7 @@ export const ChatHeader = () => {
  border-slate-700/50 max-h-[84px] px-6 flex-1"
   >
     <div className="flex items-center space-x-3">
-      <div className={`avatar online}`}>
+      <div className={`avatar online`}>
         <div className="w-12 rounded-full">
           <img src={selectedUser.profilePic || "/avatar.png"} alt={selectedUser.fullName} />
         </div>
