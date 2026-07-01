@@ -76,7 +76,6 @@ export const getChatPartners = async(req,res) => {
         const chatPartnerIds = [...new Set(messages.map((msg) => 
             msg.senderId.toString() === loggedInUserId.toString() ? msg.recieverId.toString() : msg.senderId.toString()
         ))]
-        console.log(chatPartnerIds)
         const chatPartners = await User.find({_id: {$in: chatPartnerIds}}).select("-password");
         res.status(200).json(chatPartners)
     } catch (error) {
