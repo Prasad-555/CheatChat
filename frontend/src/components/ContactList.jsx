@@ -5,12 +5,13 @@ import UserLoadingSkelaton from './UserLoadingSkelaton';
 import NoChatsFound from './NoChatsFound';
 const ContactList = () => {
   const { getAllContacts, allContacts, setSelectedUser, isUserLoading } = useChatStore();
+  const {onlineUsers} = useAuthStore();
   useEffect(() => {
     getAllContacts();
   },[getAllContacts]);
   
   if( isUserLoading ) return <UserLoadingSkelaton/>
-
+  
   return (
     <>
     {allContacts.map((contact) => (
@@ -20,7 +21,7 @@ const ContactList = () => {
         onClick={() => setSelectedUser(contact)}
       >
         <div className="flex items-center gap-3">
-          <div className={`avatar online}`}>
+          <div className={`avatar ${onlineUsers.includes(contact._id) ? "online": ""}`}>
             <div className="size-12 rounded-full">
               <img src={contact.profilePic || "/avatar.png"} />
             </div>
