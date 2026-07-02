@@ -1,6 +1,7 @@
 import User from "../models/userModel.js"
 import Message from "../models/messageModel.js"
 import cloudinary from "../lib/cloudinary.js";
+import { getRecieverSocketId, io } from "../lib/socket.js";
 
 export const getAllContacts = async(req,res) => {
     try {
@@ -59,7 +60,10 @@ export const sendMessage = async(req,res) => {
 
         await newMessage.save();
         //todo Send message to user in realtime
-
+        const reciverSocketId = getRecieverSocketId(recieverId);
+        if(reciverSocketId){
+            io.to(reciverSocketId).emit("newMessage", newMessage);
+        }
         res.status(201).json(newMessage);
     } catch (error) {
          console.log("Error in sendMessage controller: ", error);
